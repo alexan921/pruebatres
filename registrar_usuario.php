@@ -1,43 +1,29 @@
 <?php 
 session_start();
-require_once("../config/database.php");
+require_once("config/database.php");
 $config = new Database ();
 $con = $config->conectar();
 
-if (isset($_POST["inicio"]))
+?>
+
+<?php
+if (isset($_POST["btn2"]))
 {
-    
-    $telefono = $_POST["telefono"];
-	$c1 = $_POST["c1"];
+    $DOCUMENTO=$_POST["documento"];
+    $NOMBRE=$_POST["Nombre"];
+    $APELLIDO=$_POST["Apellido"];
+    $TELEFONO=$_POST["Telefono"];
+    $CORREO=$_POST["Correo"];
+    $CONTRASEÑA=$_POST["c2"];
+    $sql = $con->prepare("INSERT INTO `propietarios y compras` 
+        (DOCUMENTO, NOMBRE, APELLIDO, TELEFONO, CORREO, CONTRASEÑA) 
+        VALUES (?, ?, ?, ?, ?, ?)");
 
+    $sql->execute([$DOCUMENTO, $NOMBRE, $APELLIDO, $TELEFONO, $CORREO, $CONTRASEÑA]);
 
-    if ($fila) {
-        echo"<script>alert('Datos Vacios')</script>";
-	    echo"<script>window.location='../login.php'</script>";
-    }
-    else
-    {
-        $sql = $con->prepare("SELECT * FROM `propietarios y compras` WHERE telefono = '$telefono' AND contraseña = '$c1' ");
-        $sql->execute();
-        $fila = $sql->fetch();
-        
-        if ($fila) {
-            $_SESSION['telefono'] = $fila['telefono'];
-            $_SESSION['contraseña'] = $fila['contraseña'];
-            if ($_SESSION['telefono'] == $telefono) {
-                header("Location:../index.php");
-                exit();
-            }
-           
-        }
-        else
-        {
-            echo"<script>alert('Credenciales invalidas o usuario inactivo.')</script>";
-            echo"<script>window.location='../index.php'</script>";
-            exit();
-        }
+    echo "<script>alert('Registro exitoso');</script>";
 }
-}	
+
 ?>
 
 <!DOCTYPE html>
@@ -77,14 +63,14 @@ if (isset($_POST["inicio"]))
 <body>
     <div class="container" align="center">
         <fieldset class="mb-4">
-            <legend><i class="fas fa-user" ></i> &nbsp; COMPRA TU MOTO</legend>
+            <legend><i class="fas fa-user" ></i> &nbsp; REGISTRARSE</legend>
                 <form role="form" class="form-horizontal" method="post" name="form1" id="form1" autocomplete="off">
                     <div class="col-12 col-md-6 col-lg-6">
                         <div class="col-12 col-md-9">
                             <div class="form-outline mb-4">
                                 <div class="mb-4">
                                     <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Documento </strong></label>
+                                        <label for="cargo" class="nav-link"> &nbsp;<strong>DOCUMENTO </strong></label>
                                             <input type="int" id="documento" class="form-control Input" name="documento">
                                     </div>
                                 </div>
@@ -96,7 +82,7 @@ if (isset($_POST["inicio"]))
                             <div class="form-outline mb-4">
                                 <div class="mb-4">
                                     <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Nombre </strong></label>
+                                        <label for="cargo" class="nav-link"> &nbsp;<strong>NOMBRE </strong></label>
                                             <input type="text" id="Nombre" class="form-control Input" name="Nombre">
                                     </div>
                                 </div>
@@ -108,7 +94,7 @@ if (isset($_POST["inicio"]))
                             <div class="form-outline mb-4">
                                 <div class="mb-4">
                                     <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Apellido </strong></label>
+                                        <label for="cargo" class="nav-link"> &nbsp;<strong>APELLIDO </strong></label>
                                             <input type="text" id="Apellido" class="form-control Input" name="Apellido">
                                     </div>
                                 </div>
@@ -120,7 +106,7 @@ if (isset($_POST["inicio"]))
                             <div class="form-outline mb-4">
                                 <div class="mb-4">
                                     <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Telefono </strong></label>
+                                        <label for="cargo" class="nav-link"> &nbsp;<strong>TELEFONO </strong></label>
                                             <input type="text" id="Telefono" class="form-control Input" name="Telefono">
                                     </div>
                                 </div>
@@ -132,20 +118,8 @@ if (isset($_POST["inicio"]))
                             <div class="form-outline mb-4">
                                 <div class="mb-4">
                                     <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Marca </strong></label>
-                                            <input type="text" id="Marca" class="form-control Input" name="Marca">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="col-12 col-md-6 col-lg-6">
-                        <div class="col-12 col-md-9">
-                            <div class="form-outline mb-4">
-                                <div class="mb-4">
-                                    <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Tipo-Moto</strong></label>
-                                            <input type="text" id="Tipo-Moto" class="form-control Input" name="Tipo-Moto">
+                                        <label for="cargo" class="nav-link"> &nbsp;<strong>CORREO </strong></label>
+                                            <input type="text" id="Correo" class="form-control Input" name="Correo">
                                     </div>
                                 </div>
                             </div>
@@ -156,32 +130,8 @@ if (isset($_POST["inicio"]))
                             <div class="form-outline mb-4">
                                 <div class="mb-4">
                                     <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Cilindrada </strong></label>
-                                            <input type="text" id="Cilindrada" class="form-control Input" name="Cilindrada">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="col-12 col-md-9">
-                            <div class="form-outline mb-4">
-                                <div class="mb-4">
-                                    <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Fecha-compra</strong></label>
-                                            <input type="Date" id="fecha" class="form-control Input" name="fecha">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-6 col-lg-6">
-                        <div class="col-12 col-md-9">
-                            <div class="form-outline mb-4">
-                                <div class="mb-4">
-                                    <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>Unidades </strong></label>
-                                            <input type="text" id="Unidades" class="form-control Input" name="Unidades">
+                                        <label for="cargo" class="nav-link"> &nbsp;<strong>CONTRASEÑA </strong></label>
+                                        <input type="password" id="c2" class="form-control Input" name="c2">   
                                     </div>
                                 </div>
                             </div>

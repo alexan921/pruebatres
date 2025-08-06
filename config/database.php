@@ -2,9 +2,9 @@
 class Database
 {
    
-    private $hostname = "";
-    private $database = "";
-    private $username = "";
+    private $hostname = "127.0.0.1";
+    private $database = "compramotos";
+    private $username = "root";
     private $password = "";
     private $chasrset = "utf8";
 

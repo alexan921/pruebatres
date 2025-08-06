@@ -18,6 +18,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Rubik:wght@500;600;700&display=swap" rel="stylesheet">
 
     <!-- Icon Font Stylesheet -->
+     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> 
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet"> 
     
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
@@ -40,7 +42,7 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg bg-white navbar-light sticky-top py-0 pe-5">
         <a href="index.html" class="navbar-brand ps-5 me-0">
-        <img src="img/">
+        <img src="img/logo3.png">
         </a>
 
        
@@ -67,7 +69,7 @@
                             <div class="form-outline mb-4">
                                 <div class="mb-4">
                                     <div class="form-outline mb-4">
-                                        <label for="cargo" class="nav-link"> &nbsp;<strong>DOCUMENTO </strong></label>
+                                        <label for="cargo" class="nav-link"> &nbsp;<strong>CELULAR </strong></label>
                                             <input type="text" id="usuario" class="form-control Input" name="usuario" maxlength="11" required>
                                     </div>
                                 </div>
